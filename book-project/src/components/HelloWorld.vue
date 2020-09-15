@@ -19,17 +19,15 @@ export default {
       console.log('dalong')
     },
     stateMent() {
-      //  invoices.json 数据是一个数组
-      const invoice = invoices[0]
       let totalAmount = 0
       let volumeCredits = 0
-      let result = `Statement for ${invoice.customer}\n`
+      let result = `Statement for ${invoices.customer}\n`
       const format = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
         minimumIntegerDigits: 2
       }).format
-      for (const perf of invoice.performances) {
+      for (const perf of invoices.performances) {
         const play = plays[perf.playID]
         let thisAmount = 0
 
