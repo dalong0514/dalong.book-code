@@ -42,7 +42,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "space-before-function-paren": [2, "never"]
+    },
     "overrides": [
       {
         "files": [
