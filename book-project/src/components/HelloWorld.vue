@@ -6,8 +6,7 @@
 </template>
 
 <script>
-import { invoices } from '@/dalong/invoices'
-import { plays } from '@/dalong/plays'
+import { invoices, plays } from '@/dalong/data'
 
 export default {
   name: 'HelloWorld',
