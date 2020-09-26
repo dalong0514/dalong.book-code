@@ -63,7 +63,7 @@ function totalAmount() {
   return result
 }
 
-export function statement() {
+function renderPlainText() {
   let result = `Statement for ${invoices.customer}\n`
   for (const perf of invoices.performances) {
     // print line for this order
@@ -74,4 +74,8 @@ export function statement() {
   result += `You earned ${totalVolumeCredits()} credits\n`
   console.log(result)
   return usd(totalAmount())
+}
+
+export function statement() {
+  return renderPlainText()
 }
