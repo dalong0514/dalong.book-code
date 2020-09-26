@@ -19,5 +19,5 @@ test('string test using Re', () => {
 })
 
 test('the result match for statement', () => {
-  expect(statement()).toBe('$47.00')
+  expect(statement()).toBe('$1,730.00')
 })
