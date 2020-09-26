@@ -43,7 +43,8 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "space-before-function-paren": [2, "never"]
+      "space-before-function-paren": [2, "never"],
+      "no-unused-vars": ["warn", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
     },
     "overrides": [
       {

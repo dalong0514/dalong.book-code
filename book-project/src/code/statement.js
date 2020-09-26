@@ -44,4 +44,5 @@ export function statement() {
   result += `Amount owed is ${format(totalAmount / 100)}\n`
   result += `You earned ${volumeCredits} credits\n`
   console.log(result)
+  return format(totalAmount / 100)
 }

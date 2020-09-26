@@ -1,4 +1,5 @@
 import { sum } from '@/code/jestStudy'
+import { statement } from '@/code/statement'
 
 test('adds 1 + 2 to equal 3', () => {
   expect(sum(1, 2)).toBe(3)
@@ -15,4 +16,8 @@ test('object assignment', () => {
 
 test('string test using Re', () => {
   expect('dalong').toMatch(/^da.*/)
+})
+
+test('the result match for statement', () => {
+  expect(statement()).toBe('$1,730.00')
 })
