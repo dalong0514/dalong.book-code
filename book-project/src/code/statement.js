@@ -27,6 +27,17 @@ function playFor(aPerformance) {
   return plays[aPerformance.playID]
 }
 
+function volumeCreditsFor(aPerformance) {
+  let result = 0
+  // add volume credits
+  result += Math.max(aPerformance.audience - 30, 0)
+  // add extra credit for every ten comedy attendees
+  if (playFor(aPerformance).type === 'comedy') {
+    result += Math.floor(aPerformance.audience / 5)
+  }
+  return result
+}
+
 function usd(aNumber) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -35,23 +46,27 @@ function usd(aNumber) {
   }).format(aNumber / 100)
 }
 
+function totalVolumeCredits() {
+  let volumeCredits = 0
+  for (const perf of invoices.performances) {
+    // add volume credits
+    volumeCredits += volumeCreditsFor(perf)
+  }
+  return volumeCredits
+}
+
 export function statement() {
   let totalAmount = 0
-  let volumeCredits = 0
   let result = `Statement for ${invoices.customer}\n`
 
   for (const perf of invoices.performances) {
-    // add volume credits
-    volumeCredits += Math.max(perf.audience - 30, 0)
-    // add extra credit for every ten comedy attendees
-    if (playFor(perf).type === 'comedy') {
-      volumeCredits += Math.floor(perf.audience / 5)
-    }
-
     // print line for this order
     result += `${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)\n`
     totalAmount += amountFor(perf)
   }
+
+  const volumeCredits = totalVolumeCredits()
+
   result += `Amount owed is ${usd(totalAmount)}\n`
   result += `You earned ${volumeCredits} credits\n`
   console.log(result)
