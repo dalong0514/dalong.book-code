@@ -1,4 +1,4 @@
-const invoices = {
+export const invoices = {
   customer: 'BigCo',
   performances: [
     {
@@ -6,7 +6,7 @@ const invoices = {
       audience: 55
     },
     {
-      playID: 'as­like',
+      playID: 'dalong',
       audience: 35
     },
     {
@@ -16,12 +16,12 @@ const invoices = {
   ]
 }
 
-const plays = {
+export const plays = {
   hamlet: {
     name: 'Hamlet',
     type: 'tragedy'
   },
-  aslike: {
+  dalong: {
     name: 'As You Like It',
     type: 'comedy'
   },
@@ -31,4 +31,4 @@ const plays = {
   }
 }
 
-export default { invoices, plays }
+// export default { invoices, plays }
