@@ -27,6 +27,17 @@ function playFor(aPerformance) {
   return plays[aPerformance.playID]
 }
 
+function volumeCreditsFor(aPerformance) {
+  let result = 0
+  // add volume credits
+  result += Math.max(aPerformance.audience - 30, 0)
+  // add extra credit for every ten comedy attendees
+  if (playFor(aPerformance).type === 'comedy') {
+    result += Math.floor(aPerformance.audience / 5)
+  }
+  return result
+}
+
 export function statement() {
   let totalAmount = 0
   let volumeCredits = 0
@@ -37,13 +48,7 @@ export function statement() {
     minimumIntegerDigits: 2
   }).format
   for (const perf of invoices.performances) {
-    // add volume credits
-    volumeCredits += Math.max(perf.audience - 30, 0)
-    // add extra credit for every ten comedy attendees
-    if (playFor(perf).type === 'comedy') {
-      volumeCredits += Math.floor(perf.audience / 5)
-    }
-
+    volumeCredits = volumeCreditsFor(perf)
     // print line for this order
     result += `${playFor(perf).name}: ${format(amountFor(perf) / 100)}(${perf.audience} seats)\n`
     totalAmount += amountFor(perf)
