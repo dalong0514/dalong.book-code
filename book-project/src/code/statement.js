@@ -55,18 +55,23 @@ function totalVolumeCredits() {
   return volumeCredits
 }
 
-export function statement() {
-  let totalAmount = 0
-  let result = `Statement for ${invoices.customer}\n`
+function totalAmount() {
+  let result = 0
+  for (const perf of invoices.performances) {
+    result += amountFor(perf)
+  }
+  return result
+}
 
+export function statement() {
+  let result = `Statement for ${invoices.customer}\n`
   for (const perf of invoices.performances) {
     // print line for this order
     result += `${playFor(perf).name}: ${usd(amountFor(perf))}(${perf.audience} seats)\n`
-    totalAmount += amountFor(perf)
   }
 
-  result += `Amount owed is ${usd(totalAmount)}\n`
+  result += `Amount owed is ${usd(totalAmount())}\n`
   result += `You earned ${totalVolumeCredits()} credits\n`
   console.log(result)
-  return usd(totalAmount)
+  return usd(totalAmount())
 }
