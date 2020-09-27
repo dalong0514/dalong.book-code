@@ -21,13 +21,13 @@ function renderPlainText(data) {
   }
 }
 
-export function statement() {
+function createStatementData() {
   const statementData = {}
   statementData.customer = invoices.customer
   statementData.performances = invoices.performances.map(enrichPerformance)
   statementData.totalAmount = totalAmount(statementData)
   statementData.totalVolumeCredits = totalVolumeCredits(statementData)
-  return renderPlainText(statementData)
+  return statementData
 
   function enrichPerformance(aPerformance) {
     const result = Object.assign({}, aPerformance)
@@ -84,4 +84,8 @@ export function statement() {
     return data.performances
       .reduce((total, p) => total + p.volumeCredits, 0)
   }
+}
+
+export function statement() {
+  return renderPlainText(createStatementData())
 }
