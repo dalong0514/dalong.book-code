@@ -1,12 +1,12 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <el-button type="primary" @click="statement">测试按钮</el-button>
+    <el-button type="primary" @click="htmlStatement">测试按钮</el-button>
   </div>
 </template>
 
 <script>
-import { statement } from '@/code/statement'
+import { statement, htmlStatement } from '@/code/statement'
 
 export default {
   name: 'HelloWorld',
@@ -17,7 +17,8 @@ export default {
     test() {
       console.log('dalong')
     },
-    statement
+    statement,
+    htmlStatement
   }
 }
 </script>
