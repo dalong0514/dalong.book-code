@@ -12,17 +12,6 @@ function renderPlainText(data) {
   console.log(result)
   return usd(totalAmount())
 
-  function volumeCreditsFor(aPerformance) {
-    let result = 0
-    // add volume credits
-    result += Math.max(aPerformance.audience - 30, 0)
-    // add extra credit for every ten comedy attendees
-    if (aPerformance.play.type === 'comedy') {
-      result += Math.floor(aPerformance.audience / 5)
-    }
-    return result
-  }
-
   function usd(aNumber) {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -35,7 +24,7 @@ function renderPlainText(data) {
     let volumeCredits = 0
     for (const perf of data.performances) {
       // add volume credits
-      volumeCredits += volumeCreditsFor(perf)
+      volumeCredits += perf.volumeCredits
     }
     return volumeCredits
   }
@@ -59,6 +48,7 @@ export function statement() {
     const result = Object.assign({}, aPerformance)
     result.play = playFor(result)
     result.amount = amountFor(result)
+    result.volumeCredits = volumeCreditsFor(result)
     return result
   }
 
@@ -85,6 +75,17 @@ export function statement() {
         break
       default:
         throw new Error(`unkown type: ${aPerformance.play.type}`)
+    }
+    return result
+  }
+
+  function volumeCreditsFor(aPerformance) {
+    let result = 0
+    // add volume credits
+    result += Math.max(aPerformance.audience - 30, 0)
+    // add extra credit for every ten comedy attendees
+    if (aPerformance.play.type === 'comedy') {
+      result += Math.floor(aPerformance.audience / 5)
     }
     return result
   }
