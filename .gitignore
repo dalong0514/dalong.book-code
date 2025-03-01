@@ -170,5 +170,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# working space
-working
+# dataset for book
+2024097Deep_Learning_from_Scratch/dataset
